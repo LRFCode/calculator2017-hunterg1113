@@ -96,7 +96,6 @@ public class Calculator
 
             System.out.println("The answer is: " + result);
             System.out.println();
-            System.out.println("Previous set to: " + userInput.getPrev());
 
             if (userInput.newCalculation().trim().toLowerCase().equals("n"))
             {
