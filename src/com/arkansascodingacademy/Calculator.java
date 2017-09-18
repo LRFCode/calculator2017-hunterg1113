@@ -6,35 +6,54 @@ public class Calculator
 {
     public void run()
     {
-        UserInput userInput = new UserInput();
-        userInput.scan();
+        boolean calculating = true;
 
-        BigDecimal firstNumber = userInput.getFirstNumber();
-        BigDecimal secondNumber = userInput.getSecondNumber();
-        String operator = userInput.getOperator();
-
-        BigDecimal result = null;
-
-        switch(operator)
+        while (calculating)
         {
-            case "+":
-            case "plus":
-                System.out.println("Adding " + firstNumber + " to " + secondNumber);
-                result = firstNumber.add(secondNumber);
-                break;
-            case "-":
-                System.out.println("Subtracting " + secondNumber + " from " + firstNumber);
-                //TODO Code the subtract
-                break;
-            //TODO CODE multiply
-            //TODO CODE divide
+            UserInput userInput = new UserInput();
+            userInput.scan();
 
-            default:
-                System.out.println("You are confusing me");
-                result = new BigDecimal("0");
+            BigDecimal firstNumber = userInput.getFirstNumber();
+            BigDecimal secondNumber = userInput.getSecondNumber();
+            String operator = userInput.getOperator();
+
+            BigDecimal result = null;
+
+            switch (operator)
+            {
+                case "+":
+                    System.out.println("Adding " + firstNumber + " to " + secondNumber);
+                    result = firstNumber.add(secondNumber);
+                    break;
+                case "-":
+                    System.out.println("Subtracting " + secondNumber + " from " + firstNumber);
+                    result = firstNumber.subtract(secondNumber);
+                    break;
+                case "*":
+                    System.out.println("Multiplying " + firstNumber + " by " + secondNumber);
+                    result = firstNumber.multiply(secondNumber);
+                    break;
+                case "/":
+                    System.out.println("Dividing " + firstNumber + " by " + secondNumber);
+                    result = firstNumber.divide(secondNumber);
+                    break;
+                case "^":
+                    System.out.println(firstNumber + " to the power of " + secondNumber);
+                    int x = secondNumber.intValue();
+                    result = firstNumber.pow(x);
+                    break;
+                default:
+                    System.out.println("You are confusing me");
+                    result = new BigDecimal("0");
+            }
+
+            System.out.println("The answer is: " + result);
+            System.out.println();
+
+            if (userInput.newCalculation().trim().toLowerCase().equals("n"))
+            {
+                calculating = false;
+            }
         }
-
-        System.out.println("The answer is: " + result);
-
     }
 }

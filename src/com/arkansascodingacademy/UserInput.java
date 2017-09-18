@@ -5,7 +5,6 @@ import java.util.Scanner;
 
 public class UserInput
 {
-    //Ex 2.18 + 4.56
     public BigDecimal firstNumber;
     private BigDecimal secondNumber;
     private String operator;
@@ -35,6 +34,14 @@ public class UserInput
         firstNumber = new BigDecimal(input[0]);
         operator = input[1];
         secondNumber = new BigDecimal(input[2]);
+    }
+
+    public String newCalculation()
+    {
+        System.out.println("Another calculation? Y/N");
+        Scanner scanner = new Scanner(System.in);
+
+        return scanner.nextLine();
     }
 
 }
