@@ -8,6 +8,7 @@ public class UserInput
     public BigDecimal firstNumber;
     private BigDecimal secondNumber;
     private String operator;
+    private BigDecimal prev;
 
     public BigDecimal getFirstNumber()
     {
@@ -31,9 +32,38 @@ public class UserInput
 
         String input[] = scanner.nextLine().split(" ");
 
-        firstNumber = new BigDecimal(input[0]);
-        operator = input[1];
-        secondNumber = new BigDecimal(input[2]);
+        if (input.length == 3)
+        {
+            if (input[0].trim().toLowerCase().equals("prev"))
+            {
+                firstNumber = prev;
+                operator = input[1];
+                secondNumber = new BigDecimal(input[2]);
+            }
+            else if (input[2].trim().toLowerCase().equals("prev"))
+            {
+                firstNumber = new BigDecimal(input[0]);
+                operator = input[1];
+                secondNumber = prev;
+            }
+            else
+            {
+                firstNumber = new BigDecimal(input[0]);
+                operator = input[1];
+                secondNumber = new BigDecimal(input[2]);
+            }
+        }
+
+        if (input.length == 2)
+        {
+            firstNumber = new BigDecimal(input[0]);
+            operator = input[1];
+        }
+    }
+
+    public void setPrev(BigDecimal x)
+    {
+        prev = x;
     }
 
     public String newCalculation()
@@ -42,6 +72,11 @@ public class UserInput
         Scanner scanner = new Scanner(System.in);
 
         return scanner.nextLine();
+    }
+
+    public BigDecimal getPrev()
+    {
+        return prev;
     }
 
 }
