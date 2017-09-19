@@ -62,7 +62,7 @@ public class CalculatorPEMDAS
 
             case "/":
                 System.out.println("Dividing " + firstNumber + " by " + secondNumber);
-                result = firstNumber.divide(secondNumber);
+                result = firstNumber.divide(secondNumber, 2, BigDecimal.ROUND_HALF_UP);
                 break;
 
             case "^":
@@ -81,6 +81,15 @@ public class CalculatorPEMDAS
 
     public ArrayList<String> scanArrayOfOperators(ArrayList<Operator> operators)
     {
+        for (int i = 0; i < operators.size(); i++)
+        {
+            switch (operators.get(i).getOperator())
+            {
+                case "(":
+
+            }
+        }
+
         for (int i = 0; i < operators.size(); i++)
         {
             switch (operators.get(i).getOperator())
@@ -123,7 +132,8 @@ public class CalculatorPEMDAS
         for (int i = 0; i < equation.size(); i++)
         {
             if (equation.get(i).equals("+") || equation.get(i).equals("-") || equation.get(i).equals("*") ||
-                    equation.get(i).equals("/") || equation.get(i).equals("^"))
+                    equation.get(i).equals("/") || equation.get(i).equals("^") || equation.get(i).equals("(") ||
+                    equation.get(i).equals(")"))
             {
                 operator = new Operator(i, equation.get(i));
                 operators.add(operator);
