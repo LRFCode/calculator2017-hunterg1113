@@ -23,6 +23,8 @@ public class CalculatorPEMDAS
             ArrayList<String> array = scanArrayOfOperators(operators);
 
             calculate(array);
+
+            createArrayOfOperators(equation);
         }
 
         ArrayList<String> array = scanArrayOfOperators(operators);
@@ -34,9 +36,9 @@ public class CalculatorPEMDAS
 
     public void calculate(ArrayList<String> array)
     {
-        BigDecimal firstNumber = new BigDecimal(array.get(0));
+        BigDecimal secondNumber = new BigDecimal(array.get(0));
         String operator = array.get(1);
-        BigDecimal secondNumber = new BigDecimal(array.get(2));
+        BigDecimal firstNumber = new BigDecimal(array.get(2));
         String indexOfEquation = array.get(3);
 
         BigDecimal result = null;
@@ -74,7 +76,7 @@ public class CalculatorPEMDAS
                 result = new BigDecimal("0");
         }
 
-        equation.add(Integer.parseInt(indexOfEquation), result.toString());
+        equation.add((Integer.parseInt(indexOfEquation) - 1), result.toString());
     }
 
     public ArrayList<String> scanArrayOfOperators(ArrayList<Operator> operators)
@@ -94,13 +96,7 @@ public class CalculatorPEMDAS
             {
                 case "*":
                     return createArray(i);
-            }
-        }
 
-        for (int i = 0; i < operators.size(); i++)
-        {
-            switch (operators.get(i).getOperator())
-            {
                 case "/":
                     return createArray(i);
             }
@@ -112,13 +108,7 @@ public class CalculatorPEMDAS
             {
                 case "+":
                     return createArray(i);
-            }
-        }
 
-        for (int i = 0; i < operators.size(); i++)
-        {
-            switch (operators.get(i).getOperator())
-            {
                 case "-":
                     return createArray(i);
             }
@@ -128,6 +118,8 @@ public class CalculatorPEMDAS
 
     public void createArrayOfOperators(ArrayList<String> equation)
     {
+        operators.clear();
+
         for (int i = 0; i < equation.size(); i++)
         {
             if (equation.get(i).equals("+") || equation.get(i).equals("-") || equation.get(i).equals("*") ||
