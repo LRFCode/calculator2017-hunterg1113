@@ -10,21 +10,6 @@ public class UserInput
     private String operator;
     private BigDecimal prev;
 
-    public BigDecimal getFirstNumber()
-    {
-        return firstNumber;
-    }
-
-    public BigDecimal getSecondNumber()
-    {
-        return secondNumber;
-    }
-
-    public String getOperator()
-    {
-        return operator;
-    }
-
     public void scan()
     {
         System.out.println("Please enter your calculation:");
@@ -72,6 +57,20 @@ public class UserInput
         Scanner scanner = new Scanner(System.in);
 
         return scanner.nextLine();
+    }
+    public BigDecimal getFirstNumber()
+    {
+        return firstNumber;
+    }
+
+    public BigDecimal getSecondNumber()
+    {
+        return secondNumber;
+    }
+
+    public String getOperator()
+    {
+        return operator;
     }
 
     public BigDecimal getPrev()
