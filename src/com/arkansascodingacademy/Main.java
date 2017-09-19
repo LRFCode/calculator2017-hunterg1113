@@ -6,7 +6,7 @@ package com.arkansascodingacademy;
 //TODONE GOLD Make calculator sum series of numbers when user types 2 TO 10 or 10 TO 2
 //TODONE GOLD Make calculator solve x factorial
 //TODONE GOLD Make calculator be able to use previous calculated value using PREV in place of number
-//TODO PLATINUM Make calculator take full equations and solve in correct order EX: (5 + 2) * 8
+//TODONE PLATINUM Make calculator take full equations and solve in correct order EX: (5 + 2) * 8
 
 public class Main
 {
