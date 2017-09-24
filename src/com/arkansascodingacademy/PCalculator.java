@@ -1,32 +1,22 @@
 package com.arkansascodingacademy;
 
-import java.lang.reflect.Array;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
-public class CalculatorPEMDAS
+public class PCalculator
 {
-    private UserInputPEMDAS userInput = new UserInputPEMDAS();
     private ArrayList<String> equation = new ArrayList<>();
     private ArrayList<Operator> operators = new ArrayList<>();
-    private ArrayList<Operator> pOperators = new ArrayList<>();
-    private PCalculator pCalculator = new PCalculator();
     private Operator operator;
 
-    public void run()
+
+    public String run(ArrayList <String> pArray)
     {
-        userInput.createArrayFromEquation();
+        equation = pArray;
+        equation.remove(0);
+        equation.remove(equation.size()-1);
 
-        equation = userInput.getEquation();
-
-        createArrayOfOperators(equation);
-
-        while (pOperators.size() > 0)
-        {
-            calculateP();
-        }
-
-        createArrayOfOperators(equation);
+        createArrayOfOperators(pArray);
 
         while (operators.size() > 1)
         {
@@ -41,32 +31,38 @@ public class CalculatorPEMDAS
 
         calculate(array);
 
-        System.out.println("Result: " + equation.get(0));
+        return equation.get(0);
     }
 
-    public void calculateP()
+    public ArrayList<String> createPArray()
     {
-        int index = pOperators.get(pOperators.size() - 1).getIndex();
+        ArrayList<Operator> pArray = new ArrayList<>();
 
-        ArrayList<String> pArray = new ArrayList<>();
-
-        boolean pFound = false;
-
-        while (!pFound)
+        for (int i = 0; i < operators.size(); i++)
         {
-            pArray.add(equation.remove(pOperators.get(pOperators.size() - 1).getIndex()));
-
-            if (pArray.get(pArray.size() - 1).equals(")"))
+            if (operators.get(i).getOperator().equals("("))
             {
-                pFound = true;
+                pArray.add(operators.remove(i));
             }
         }
 
-        String result = pCalculator.run(pArray);
+        ArrayList<String> pToCalculate = new ArrayList<>();
 
-        equation.add(index, result);
+        boolean foundNextP = false;
 
-        pOperators.remove(pOperators.size()-1);
+        int x = pArray.get(pArray.size() - 1).getIndex();
+
+        while (!foundNextP)
+        {
+            if (equation.get(x).equals(")"))
+            {
+                foundNextP = true;
+            }
+
+            pToCalculate.add(equation.remove(x));
+        }
+
+        return pToCalculate;
     }
 
     public void calculate(ArrayList<String> array)
@@ -162,11 +158,6 @@ public class CalculatorPEMDAS
             {
                 operator = new Operator(i, equation.get(i));
                 operators.add(operator);
-            }
-            else if (equation.get(i).equals("("))
-            {
-                operator = new Operator(i, equation.get(i));
-                pOperators.add(operator);
             }
         }
     }
